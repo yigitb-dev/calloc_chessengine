@@ -109,13 +109,14 @@ static inline void set_bit(uint64_t *bb, enum Square target_sq) {
 }
 
 static inline void clear_bit(uint64_t *bb, enum Square target_sq) {
-  *bb &= (1ULL << target_sq);
+  *bb &= ~(1ULL << target_sq);
 }
 
-int check_square(BitBoard *bb, enum Square target_sq) {
-  if ((1ULL << target_sq) & (bb->all_pieces)) {
-    return 0;
+static inline int check_square(BitBoard *bb, enum Square target_sq) {
+  if (((1ULL << target_sq) & (bb->all_pieces)) != 0) {
+    return 1;
   }
+  return 0;
 }
 
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
