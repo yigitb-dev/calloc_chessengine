@@ -89,6 +89,8 @@ enum Square {
   H8
 };
 
+// Because we also store our derived bb's like black_pieces white_pieces and
+// all_pieces we must remember to update the struct manually
 void init_board(BitBoard *bb) {
   bb->white_pawns = 0x000000000000FF00ULL;
   bb->white_rooks = (1ULL << A1) | (1ULL << H1);
