@@ -89,7 +89,21 @@ enum Square {
   H8
 };
 
-enum Piece { PAWN, ROOK, KNIGHT, BISCHOP, QUEEN, KING, EMPTY };
+enum Piece {
+  W_PAWN,
+  W_ROOK,
+  W_KNIGHT,
+  W_BISCHOP,
+  W_QUEEN,
+  W_KING,
+  B_PAWN,
+  B_ROOK,
+  B_KNIGHT,
+  B_BISCHOP,
+  B_QUEEN,
+  B_KING,
+  EMPTY
+};
 
 // Because we also store our derived bb's like black_pieces white_pieces and
 // all_pieces we must remember to update the struct manually
@@ -123,20 +137,42 @@ static inline int square_is_occupied(uint64_t bm, enum Square target_sq) {
   return 0;
 }
 
-enum Piece get_piece(BitBoard *bb, enum Square target_sq) {
+enum Piece get_piece(const BitBoard *bb, enum Square target_sq) {
+
   if (square_is_occupied(bb->all_pieces, target_sq)) {
+
     if (square_is_occupied(bb->white_pieces, target_sq)) {
-      if (square_is_occupied(bb->white_pawns, target_sq)) {
-        // Hier moet ik verder zoeken rekening houdend met aantal stukken en
-        // miss pawns niet checken als de square een 8e of een 1e rank is
-      }
-    } else {
+      if (square_is_occupied(bb->white_pawns, target_sq))
+        return W_PAWN;
+      if (square_is_occupied(bb->white_knights, target_sq))
+        return W_KNIGHT;
+      if (square_is_occupied(bb->white_bishops, target_sq))
+        return W_BISCHOP;
+      if (square_is_occupied(bb->white_rooks, target_sq))
+        return W_ROOK;
+      if (square_is_occupied(bb->white_queens, target_sq))
+        return W_QUEEN;
+      if (square_is_occupied(bb->white_king, target_sq))
+        return W_KING;
+    }
+
+    else {
+      if (square_is_occupied(bb->black_pawns, target_sq))
+        return B_PAWN;
+      if (square_is_occupied(bb->black_knights, target_sq))
+        return B_KNIGHT;
+      if (square_is_occupied(bb->black_bishops, target_sq))
+        return B_BISCHOP;
+      if (square_is_occupied(bb->black_rooks, target_sq))
+        return B_ROOK;
+      if (square_is_occupied(bb->black_queens, target_sq))
+        return B_QUEEN;
+      if (square_is_occupied(bb->black_king, target_sq))
+        return B_KING;
     }
   }
 
-  else {
-    return EMPTY;
-  }
+  return EMPTY;
 }
 
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
