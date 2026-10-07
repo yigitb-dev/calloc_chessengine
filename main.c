@@ -89,6 +89,8 @@ enum Square {
   H8
 };
 
+enum Piece { PAWN, ROOK, KNIGHT, BISCHOP, QUEEN, KING, EMPTY };
+
 // Because we also store our derived bb's like black_pieces white_pieces and
 // all_pieces we must remember to update the struct manually
 void init_board(BitBoard *bb) {
@@ -114,11 +116,27 @@ static inline void clear_bit(uint64_t *bb, enum Square target_sq) {
   *bb &= ~(1ULL << target_sq);
 }
 
-static inline int check_square(BitBoard *bb, enum Square target_sq) {
-  if (((1ULL << target_sq) & (bb->all_pieces)) != 0) {
+static inline int square_is_occupied(uint64_t bm, enum Square target_sq) {
+  if (((1ULL << target_sq) & (bm)) != 0) {
     return 1;
   }
   return 0;
+}
+
+enum Piece get_piece(BitBoard *bb, enum Square target_sq) {
+  if (square_is_occupied(bb->all_pieces, target_sq)) {
+    if (square_is_occupied(bb->white_pieces, target_sq)) {
+      if (square_is_occupied(bb->white_pawns, target_sq)) {
+        // Hier moet ik verder zoeken rekening houdend met aantal stukken en
+        // miss pawns niet checken als de square een 8e of een 1e rank is
+      }
+    } else {
+    }
+  }
+
+  else {
+    return EMPTY;
+  }
 }
 
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
