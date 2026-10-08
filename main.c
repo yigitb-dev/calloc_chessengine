@@ -175,6 +175,10 @@ enum Piece get_piece(const BitBoard *bb, enum Square target_sq) {
   return EMPTY;
 }
 
+int move_piece(BitBoard *bb, enum Square square_from, enum Square square_to) {
+  return 0;
+}
+
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
 // (1ULL << E2) creates a bitmask where only E2 is 1 and the rest is 0
 // & is the AND operator | is the OR operator
