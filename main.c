@@ -6,4 +6,11 @@
 // Combining ~(1ULL << E2) and the bitboard itself makes E2 0 if it was already
 // 1
 
-int main() { return 0; }
+int main() {
+  BitBoard bb;
+
+  init_board(&bb);
+  print_board(&bb);
+
+  return 0;
+}

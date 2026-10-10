@@ -124,6 +124,6 @@ static inline int square_is_occupied(uint64_t bm, enum Square target_sq) {
 
 void init_board(BitBoard *bb);
 enum Piece get_piece(const BitBoard *bb, enum Square target_sq);
-int move_piece(BitBoard *bb, enum Square square_from, enum Square square_to);
+void print_board(const BitBoard *bb);
 
 #endif

@@ -1,5 +1,5 @@
 #include "board.h"
-#include <string.h>
+#include <stdio.h>
 
 // Because we also store our derived bb's like black_pieces white_pieces and
 // all_pieces we must remember to update the struct manually
@@ -57,6 +57,27 @@ enum Piece get_piece(const BitBoard *bb, enum Square target_sq) {
   return EMPTY;
 }
 
-int move_piece(BitBoard *bb, enum Square square_from, enum Square square_to) {
-  return 0;
+void print_board(const BitBoard *bb) {
+  const char *piece_symbols[] = {
+      "WP", "WR", "WN", "WB", "WQ", "WK", // White pieces
+      "BP", "BR", "BN", "BB", "BQ", "BK", // Black pieces
+      "x"                                 // EMPTY square
+  };
+
+  printf("\n  +------------------------+\n");
+
+  for (int rank = 7; rank >= 0; rank--) {
+    printf("%d | ", rank + 1); // Print rank number (1-8)
+
+    for (int file = 0; file < 8; file++) {
+      enum Square sq = rank * 8 + file;
+      enum Piece p = get_piece(bb, sq);
+
+      printf("%s ", piece_symbols[p]);
+    }
+    printf("|\n");
+  }
+
+  printf("  +------------------------+\n");
+  printf("    A  B  C  D  E  F  G  H  \n\n");
 }
