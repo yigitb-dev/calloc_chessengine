@@ -122,6 +122,14 @@ static inline int square_is_occupied(uint64_t bm, enum Square target_sq) {
   return 0;
 }
 
+static inline void update_boards(BitBoard *bb) {
+  bb->white_pieces = bb->white_pawns | bb->white_rooks | bb->white_knights |
+                     bb->white_bishops | bb->white_queens | bb->white_king;
+  bb->black_pieces = bb->black_pawns | bb->black_rooks | bb->black_knights |
+                     bb->black_bishops | bb->black_queens | bb->black_king;
+  bb->all_pieces = bb->white_pieces | bb->black_pieces;
+}
+
 void init_board(BitBoard *bb);
 enum Piece get_piece(const BitBoard *bb, enum Square target_sq);
 void print_board(const BitBoard *bb);

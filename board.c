@@ -17,6 +17,8 @@ void init_board(BitBoard *bb) {
   bb->black_bishops = (1ULL << C8) | (1ULL << F8);
   bb->black_queens = (1ULL << D8);
   bb->black_king = (1ULL << E8);
+
+  update_boards(bb);
 }
 
 enum Piece get_piece(const BitBoard *bb, enum Square target_sq) {
@@ -61,7 +63,7 @@ void print_board(const BitBoard *bb) {
   const char *piece_symbols[] = {
       "WP", "WR", "WN", "WB", "WQ", "WK", // White pieces
       "BP", "BR", "BN", "BB", "BQ", "BK", // Black pieces
-      "x"                                 // EMPTY square
+      " x"                                // EMPTY square
   };
 
   printf("\n  +------------------------+\n");
