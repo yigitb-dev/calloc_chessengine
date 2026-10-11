@@ -1,4 +1,4 @@
-# CHESS BITBOARD DESIGN SYNOPSIS
+# CHESS Engine Design
 
 ## 1. Board Mapping (LERF Convention)
 * A 64-bit integer (`uint64_t`) maps sequentially from square a1 to h8.
