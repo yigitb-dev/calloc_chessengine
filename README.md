@@ -12,7 +12,7 @@ A high-performance, lightweight chess engine written from scratch in **100% pure
 
   * **State & Storage (`board.c` / `board.h`):** Handles core bitboards, aggregate occupancy updates (`all_pieces`, `white_pieces`, `black_pieces`), and ASCII board visualization.
 
-  * **Rules & Logic (`piecelogic.c` / `piecelogic.h`):** Precomputes and evaluates piece attack tables and move generation.
+  * **Rules & Logic (`chesslogic.c` / `chesslogic.h`):** Precomputes and evaluates piece attack tables and move generation.
 
   * **Evaluation (`evaluation.c` / `evaluation.h`):** Dedicated future space for material counting and board scoring.
 
@@ -37,7 +37,7 @@ chess_engine/
 To compile the engine together with all modular `.c` source files using GCC or Clang:
 
 ```
-gcc main.c board.c piecelogic.c evaluation.c -o chess_engine
+gcc main.c board.c chesslogic.c evaluation.c -o chess_engine
 
 ```
 
