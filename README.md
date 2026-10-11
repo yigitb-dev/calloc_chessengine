@@ -32,7 +32,7 @@ chess_engine/
 
 ```
 
-## 🛠️ Compilation and Execution
+##  Compilation and Execution
 
 To compile the engine together with all modular `.c` source files using GCC or Clang:
 
