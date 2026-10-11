@@ -23,5 +23,9 @@
 ## 3. Core C Macros
 * Get bit:   `#define get_bit(bb, sq) (((bb) >> (sq)) & 1ULL)`
 * Set bit:   `#define set_bit(bb, sq) ((bb) |= (1ULL << (sq)))`
-* Clear bit: `#define pop_bit(bb, sq) ((bb) &= ~(1ULL << (sq)))`
+* Clear bit: `#define clear_bit(bb, sq) ((bb) &= ~(1ULL << (sq)))`
 *(Always use 1ULL suffix to ensure 64-bit shifting operations)*
+
+## 4. Precalculated non-sliding piece moves
+* Every non-sliding piece moves can be precalculated for each of the 64 squares once to just use an array lookup
+* This however isn't possible for sliding pieces.
