@@ -1,4 +1,5 @@
 #include "board.h"
+#include "chesslogic.h"
 
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
 // (1ULL << E2) creates a bitmask where only E2 is 1 and the rest is 0
