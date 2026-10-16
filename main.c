@@ -16,6 +16,8 @@ int main() {
   // Precalculate non-sliding pieces' moves for maximum efficiency
   init_knight_moves();
   init_king_moves();
+  init_white_pawn_attacks();
+  init_black_pawn_attacks();
 
   return 0;
 }
