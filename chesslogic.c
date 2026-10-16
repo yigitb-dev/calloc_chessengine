@@ -20,13 +20,10 @@ void init_knight_moves() {
           current_file + knight_attack_patterns[k].file_offset < 8 &&
           current_rank + knight_attack_patterns[k].rank_offset >= 0 &&
           current_rank + knight_attack_patterns[k].rank_offset < 8) {
-        enum Square target_square =
-            get_square(current_file + knight_attack_patterns[k].file_offset,
-                       current_rank + knight_attack_patterns[k].rank_offset);
+        enum Square target_square = get_square(current_file + knight_attack_patterns[k].file_offset, current_rank + knight_attack_patterns[k].rank_offset);
         possible_moves_from_square |= (1ULL << target_square);
       }
     }
-
     knight_possible_moves[i] = possible_moves_from_square;
   }
 }
