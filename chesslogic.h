@@ -9,10 +9,10 @@ typedef struct {
   int file_offset;
   int rank_offset;
 } Offset;
-const Offset knight_attack_patterns[] = {{1, 2}, {1, -2}, {-1, 2}, {-1, -2},
-                                         {2, 1}, {2, -1}, {-2, 1}, {-2, -1}};
 
 enum File { A, B, C, D, E, F, G, H };
+
+extern uint64_t knight_possible_moves[64];
 
 static inline enum File get_file(enum Square square) {
   return (enum File)(square % 8);

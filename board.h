@@ -129,7 +129,6 @@ static inline void update_boards(BitBoard *bb) {
                      bb->black_bishops | bb->black_queens | bb->black_king;
   bb->all_pieces = bb->white_pieces | bb->black_pieces;
 }
-
 void init_board(BitBoard *bb);
 enum Piece get_piece(const BitBoard *bb, enum Square target_sq);
 void print_board(const BitBoard *bb);
