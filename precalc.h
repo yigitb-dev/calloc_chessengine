@@ -1,5 +1,5 @@
-#ifndef CHESSLOGIC_H
-#define CHESSLOGIC_H
+#ifndef PRECALC_H
+#define PRECALC_H
 
 #include "board.h"
 #include <stdint.h>
@@ -14,10 +14,14 @@ enum File { A, B, C, D, E, F, G, H };
 
 extern uint64_t knight_possible_moves[64];
 extern uint64_t king_possible_moves[64];
-
+extern uint64_t pawn_possible_moves[64];
 
 
 static inline enum File get_file(enum Square square) {return (enum File)(square % 8);}
 static inline int get_rank(enum Square square) { return (int)(square / 8); }
 static inline int get_square(enum File file, int rank) {return (int)(8 * rank + file);}
+
+void init_knight_moves();
+void init_king_moves();
+
 #endif

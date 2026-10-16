@@ -1,9 +1,14 @@
-#include "chesslogic.h"
+#include "precalc.h"
 #include "board.h"
 #include <stdint.h>
 #include <sys/types.h>
 
-static const Offset knight_attack_patterns[] = {
+
+
+uint64_t knight_possible_moves[64];
+void init_knight_moves() {
+  
+  static const Offset knight_attack_patterns[] = {
   {1, 2},
   {1, -2},
   {-1, 2},
@@ -13,19 +18,6 @@ static const Offset knight_attack_patterns[] = {
   {-2, 1},
   {-2, -1}};
 
-static const Offset king_attack_patterns[] = {
-  {1,-1},
-  {1,0},
-  {1,1},
-  {0,-1},
-  {0,1},
-  {-1,-1},
-  {-1,0},
-  {-1,1}
-};
-
-uint64_t knight_possible_moves[64];
-void init_knight_moves() {
   int i;
   for (i = 0; i < 64; i++) {
     uint64_t possible_moves_from_square = 0x0000000000000000ULL;
@@ -46,9 +38,21 @@ void init_knight_moves() {
   }
 }
 
-uint64_t knight_possible_moves[64];
+uint64_t king_possible_moves[64];
 void init_king_moves() 
 {
+  static const Offset king_attack_patterns[] = {
+  {1,-1},
+  {1,0},
+  {1,1},
+  {0,-1},
+  {0,1},
+  {-1,-1},
+  {-1,0},
+  {-1,1}
+  };
+
+
   int i;
   for(i=0;i<64;i++)
   {
@@ -72,3 +76,15 @@ void init_king_moves()
     }
   }
 }
+
+uint64_t pawn_possible_moves[64];
+void init_pawn_moves()
+{
+  //                      RULES OF PAWN MOVES                             
+  // If rank = 2 and colour = White then double advance possible
+  // If rank = 7 and colour = Black then double advance possible
+  // If rank +1 and File +1 is occupied by opposite colour capture possible
+  // If rank -1 and File +1 is occupied by opposite colour capture possible
+}
+
+

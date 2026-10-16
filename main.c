@@ -1,5 +1,5 @@
 #include "board.h"
-#include "chesslogic.h"
+#include "precalc.h"
 
 // ~(1ULL << E2) creates a bitmask where only E2 is 0
 // (1ULL << E2) creates a bitmask where only E2 is 1 and the rest is 0
@@ -12,6 +12,10 @@ int main() {
 
   init_board(&bb);
   print_board(&bb);
+
+  // Precalculate non-sliding pieces' moves for maximum efficiency
+  init_knight_moves();
+  init_king_moves();
 
   return 0;
 }
