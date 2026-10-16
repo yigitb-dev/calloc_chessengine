@@ -77,9 +77,10 @@ gcc main.c board.c chesslogic.c evaluation.c -o chess_engine
 
    * Dynamic move generation for rooks, bishops, and queens, paired with a robust `make_move()` / `unmake_move()` pipeline.
 
-5. **Phase 5: Search & Evaluation** *(Future)*
+5. **Phase 5 and further: Search & Evaluation** *(Future)*
 
-   * Material/positional evaluation, Minimax search trees, and Alpha-Beta pruning.
+   * Material/positional evaluation, Minimax search trees, Alpha-Beta pruning and Universal chess interface(UCI) support.
+   * All these things will probably have their own phase as they are complex concepts to implement.
 
 ## License
 
