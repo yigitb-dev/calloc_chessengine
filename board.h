@@ -107,6 +107,8 @@ enum Piece {
   EMPTY
 };
 
+enum File { A, B, C, D, E, F, G, H };
+
 static inline void set_bit(uint64_t *bb, enum Square target_sq) {
   *bb |= (1ULL << target_sq);
 }
@@ -129,6 +131,13 @@ static inline void update_boards(BitBoard *bb) {
                      bb->black_bishops | bb->black_queens | bb->black_king;
   bb->all_pieces = bb->white_pieces | bb->black_pieces;
 }
+
+
+static inline enum File get_file(enum Square square) {return (enum File)(square % 8);}
+static inline int get_rank(enum Square square) { return (int)(square / 8); }
+static inline int get_square(enum File file, int rank) {return (int)(8 * rank + file);}
+
+
 void init_board(BitBoard *bb);
 enum Piece get_piece(const BitBoard *bb, enum Square target_sq);
 void print_board(const BitBoard *bb);
