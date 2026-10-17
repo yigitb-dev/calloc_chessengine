@@ -5,7 +5,7 @@ A lightweight chess engine written from scratch in **100% pure C** (C99), comple
 ## Project Structure
 
 ```
-chess_engine/
+calloc_chessengine/
 ├── board.h            # Core data structures, enums (Square, Piece), and bitwise inline helpers
 ├── board.c            # Board initialization, occupancy recalculation, and ASCII printing
 ├── precalc.h       # Prototypes for attack tables and piece movement rules
