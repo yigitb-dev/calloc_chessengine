@@ -2,30 +2,16 @@
 
 A lightweight chess engine written from scratch in **100% pure C** (C99), completely free of C++ or Object-Oriented Programming abstractions. Built with a data-oriented architecture designed specifically for low-level bitboard manipulation, fast attack lookups, and future integration with minimax search and alpha-beta pruning.
 
-## Key Architectural Principles
-
-* **100% Pure C Codebase:** Designed to maintain a pristine, clean language overview on GitHub without C++ or mixed-paradigm pollution.
-
-* **Data-Oriented Bitboard Design:** Utilizes `uint64_t` bitmasks to represent piece sets and board states, enabling ultra-fast bulk operations and shift logic.
-
-* **Strict Separation of Concerns:**
-
-  * **State & Storage (`board.c` / `board.h`):** Handles core bitboards, aggregate occupancy updates (`all_pieces`, `white_pieces`, `black_pieces`), and ASCII board visualization.
-
-  * **Rules & Logic (`chesslogic.c` / `chesslogic.h`):** Precomputes and evaluates piece attack tables and move generation.
-
-  * **Evaluation (`evaluation.c` / `evaluation.h`):** Dedicated future space for material counting and board scoring.
-
-* **Precomputed Attack Tables:** Employs coordinate-safe startup initialization loops for non-sliding pieces (knights, kings) to completely eliminate board-wrapping bugs and runtime overhead.
-
 ## Project Structure
 
 ```
-chess_engine/
+calloc_chessengine/
 ├── board.h            # Core data structures, enums (Square, Piece), and bitwise inline helpers
 ├── board.c            # Board initialization, occupancy recalculation, and ASCII printing
 ├── precalc.h       # Prototypes for attack tables and piece movement rules
 ├── precalc.c       # Precomputation routines and move generation logic
+├── movegen.h       # Declaration of movegen.c functions
+├── movegen.c       # All of the dynamic move generation logic
 ├── evaluation.h       # Prototypes for board and position scoring
 ├── evaluation.c       # Material and positional evaluation metrics
 └── main.c             # Engine entry point and testing loop
