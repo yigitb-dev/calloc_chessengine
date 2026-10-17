@@ -24,40 +24,13 @@ A lightweight chess engine written from scratch in **100% pure C** (C99), comple
 chess_engine/
 ├── board.h            # Core data structures, enums (Square, Piece), and bitwise inline helpers
 ├── board.c            # Board initialization, occupancy recalculation, and ASCII printing
-├── chesslogic.h       # Prototypes for attack tables and piece movement rules
-├── chesslogic.c       # Precomputation routines and move generation logic
+├── precalc.h       # Prototypes for attack tables and piece movement rules
+├── precalc.c       # Precomputation routines and move generation logic
 ├── evaluation.h       # Prototypes for board and position scoring
 ├── evaluation.c       # Material and positional evaluation metrics
 └── main.c             # Engine entry point and testing loop
 
 ```
-
-##  Compilation and Execution
-
-To compile the engine together with all modular `.c` source files using GCC or Clang:
-
-```
-gcc main.c board.c chesslogic.c evaluation.c -o chess_engine
-
-```
-
-> **Note:** Do not pass header (`.h`) files directly to the compiler command; they are automatically linked via `#include` directives.
-
-### Running the Executable:
-
-* **Linux / macOS:**
-
-  ```
-  ./chess_engine
-  
-  ```
-
-* **Windows (Command Prompt / PowerShell):**
-
-  ```
-  .\chess_engine.exe
-  
-  ```
 
 ## Development Roadmap
 
@@ -65,15 +38,15 @@ gcc main.c board.c chesslogic.c evaluation.c -o chess_engine
 
    * Bitboard struct layout, individual piece boards, aggregate occupancies, and ASCII printing.
 
-2. **Phase 2: Non-Sliding Piece Logic & Precomputation**  *(Active)*
+2. **Phase 2: Non-Sliding Piece Logic & Precomputation**  *(Completed)*
 
    * Coordinate-based precomputed attack generation for knights and kings.
 
-3. **Phase 3: Pawn Movement & Captures** *(Upcoming)*
+3. **Phase 3: Pawn Movement & Captures** *(Active)*
 
    * Single/double pushes, color-specific directional shifts, and diagonal captures.
 
-4. **Phase 4: Sliding Pieces & Move Execution** *(Planned)*
+4. **Phase 4: Sliding Pieces & Move Execution** *(Upcoming)*
 
    * Dynamic move generation for rooks, bishops, and queens, paired with a robust `make_move()` / `unmake_move()` pipeline.
 
