@@ -28,13 +28,13 @@ calloc_chessengine/
 
    * Coordinate-based precomputed attack generation for knights and kings.
 
-3. **Phase 3: Pawn Movement & Captures** *(Active)*
+3. **Phase 3: Pawn Captures** *(Completed)*
 
-   * Single/double pushes, color-specific directional shifts, and diagonal captures.
+   * Precalculation of diagonal captures.
 
-4. **Phase 4: Sliding Pieces & Move Execution** *(Upcoming)*
+4. **Phase 4: Sliding Pieces & Move Execution** *(Active)*
 
-   * Dynamic move generation for rooks, bishops, and queens, paired with a robust `make_move()` / `unmake_move()` pipeline.
+   * Dynamic move generation for pawns, rooks, bishops, and queens.
 
 5. **Phase 5 and further: Search & Evaluation** *(Future)*
 
