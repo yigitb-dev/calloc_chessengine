@@ -10,6 +10,8 @@ chess_engine/
 ├── board.c            # Board initialization, occupancy recalculation, and ASCII printing
 ├── precalc.h       # Prototypes for attack tables and piece movement rules
 ├── precalc.c       # Precomputation routines and move generation logic
+├── movegen.h       # Declaration of movegen.c functions
+├── movegen.c       # All of the dynamic move generation logic
 ├── evaluation.h       # Prototypes for board and position scoring
 ├── evaluation.c       # Material and positional evaluation metrics
 └── main.c             # Engine entry point and testing loop
