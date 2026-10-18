@@ -56,6 +56,7 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 * **Role:** Implements dynamic sliding-piece attack calculators that depend on live piece occupancies.
 * **Key Functions:**
   * `get_rook_moves()`: Generates vertical and horizontal sliding rays for rooks, checking for blocking pieces along each file and rank.
+  * `get_white_rook_moves()` and `get_black_rook_moves()`: Are wrapper functions for the `get_rook_moves` function. They check wheter the occupied square is occupied by the opposing colour.  
 
 ---
 
