@@ -60,7 +60,7 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 
 ---
 
-### 4. Entry Point
+### 4. The Main Function
 
 #### `main.c`
 * **Role:** Entry point for execution.
