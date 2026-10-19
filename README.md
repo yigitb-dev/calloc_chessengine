@@ -17,6 +17,8 @@ calloc_chessengine/
 └── main.c             # Engine entry point and testing loop
 
 ```
+## Documentation
+*All of the architecture is documented in [architecture.md](https://github.com/yigitb-dev/calloc_chessengine/blob/main/architecture.md)
 
 ## Development Roadmap
 
