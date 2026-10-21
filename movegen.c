@@ -1,61 +1,50 @@
 #include "movegen.h"
-#include "precalc.c"
+#include "precalc.h"  
 #include "board.h"
 #include <stdint.h>
 
-//3 funcs: 
-//uint54_t get_rook_moves() #To avoid copying logic that is unisome with both colours
-//rook_movegen get_white_rook_moves() 
-//rook_movegen get_black_rook_moves()
-uint64_t get_rook_moves(const BitBoard *bb,enum Square square)
-{
+uint64_t get_rook_moves(const BitBoard *bb, enum Square square) {
     int rank = get_rank(square);
     enum File file = get_file(square);
-    int i;
-    int j;
-    int k;
-    int l;
-    uint64_t vertical_moves = 0x0000000000000000;
-    uint64_t horizontal_moves = 0x0000000000000000;
-    for(i = rank;rank<8;rank++)
-    {
-        
-        enum Square new_square = get_square(file, i);
-        if(square_is_occupied(bb->all_pieces, new_square) ==0)
-        {
-            vertical_moves |= (1ULL << new_square);
-        }
+    
+    uint64_t rook_moves = 0x0000000000000000ULL;
 
-        else {
-        break;
+    //Ray Up (Rank + 1 to 7)
+    for (int r = rank + 1; r < 8; r++) {
+        enum Square target_sq = (enum Square)get_square(file, r);
+        if (square_is_occupied(bb->all_pieces, target_sq)) {
+            rook_moves |= (1ULL << target_sq);
+            break; 
         }
+        rook_moves |= (1ULL << target_sq);
     }
 
-    for(j=rank;rank<8;rank--)
-    {
-        enum Square new_square = get_square(file, j);
-        if(square_is_occupied(bb->all_pieces, new_square) ==0)
-        {
-            vertical_moves |= (1ULL << new_square);
-        }
-
-        else {
-        break;
-        }
+    //Ray Down (Rank - 1 down to 0)
+    for (int r = rank - 1; r >= 0; r--) {
+        enum Square target_sq = (enum Square)get_square(file, r);
+        if (square_is_occupied(bb->all_pieces, target_sq)) {
+            rook_moves |= (1ULL << target_sq);
+            break;         }
+        rook_moves |= (1ULL << target_sq);
     }
 
-    for(k=file;file<8;file++)
-    {
-        enum Square new_square = get_square(k, rank);
-        if(square_is_occupied(bb->all_pieces,new_square) ==0)
-        {
-            horizontal_moves |= (1ULL << new_square);
-        }
-
-        else {
-        break;
-        }
+    //Ray Right (File + 1 to 7)
+    for (int f = file + 1; f < 8; f++) {
+        enum Square target_sq = (enum Square)get_square((enum File)f, rank);
+        if (square_is_occupied(bb->all_pieces, target_sq)) {
+            rook_moves |= (1ULL << target_sq);
+            break;         }
+        rook_moves |= (1ULL << target_sq);
     }
 
-    return vertical_moves | horizontal_moves;
+    //Ray Left (File - 1 down to 0)
+    for (int f = file - 1; f >= 0; f--) {
+        enum Square target_sq = (enum Square)get_square((enum File)f, rank);
+        if (square_is_occupied(bb->all_pieces, target_sq)) {
+            rook_moves |= (1ULL << target_sq);
+            break;         }
+        rook_moves |= (1ULL << target_sq);
+    }
+
+    return rook_moves;
 }
