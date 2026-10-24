@@ -1,0 +1,3 @@
+movegen.c:
+  *Instead of returning uint64_t return a struct with quiet moves and captures
+  *Test the get_diagonal_moves() logic.

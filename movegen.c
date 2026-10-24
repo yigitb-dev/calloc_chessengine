@@ -4,6 +4,10 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+
+diagonal_direction diagonal_directions_array[] = {{1,1},{1,-1},{-1,1},{-1,-1}};
+
+
 uint64_t get_straight_moves(const BitBoard *bb, enum Square square) {
     int rank = get_rank(square);
     enum File file = get_file(square);
@@ -53,5 +57,27 @@ uint64_t get_straight_moves(const BitBoard *bb, enum Square square) {
 
 uint64_t get_diagonal_moves(const BitBoard *bb, enum Square square)
 {
- return 0x0000000000000000ULL;
+  uint64_t diagonal_moves = 0x0000000000000000ULL;
+  int i;
+  for(i=0;i<4;i++)
+  {
+    int rank = get_rank(square);
+    int file = get_file(square);
+
+
+    while(square_is_occupied(bb->all_pieces, get_square(file + diagonal_directions_array[i].file_direction, rank + diagonal_directions_array[i].rank_direction)) == 0)
+    {
+      rank = rank + diagonal_directions_array[i].rank_direction;
+      file = file + diagonal_directions_array[i].file_direction;
+      enum Square target_sq = get_square(file, rank);
+
+      diagonal_moves |= (1ULL << target_sq);
+      
+    }
+  }
+
+
+  
+  return diagonal_moves;
+
 }
