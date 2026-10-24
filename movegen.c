@@ -2,8 +2,9 @@
 #include "precalc.h"  
 #include "board.h"
 #include <stdint.h>
+#include <sys/types.h>
 
-uint64_t get_rook_moves(const BitBoard *bb, enum Square square) {
+uint64_t get_straight_moves(const BitBoard *bb, enum Square square) {
     int rank = get_rank(square);
     enum File file = get_file(square);
     
@@ -47,4 +48,10 @@ uint64_t get_rook_moves(const BitBoard *bb, enum Square square) {
     }
 
     return rook_moves;
+}
+
+
+uint64_t get_diagonal_moves(const BitBoard *bb, enum Square square)
+{
+ return 0x0000000000000000ULL;
 }
