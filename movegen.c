@@ -8,76 +8,91 @@
 diagonal_direction diagonal_directions_array[] = {{1,1},{1,-1},{-1,1},{-1,-1}};
 
 
-uint64_t get_straight_moves(const BitBoard *bb, enum Square square) {
+movegen_return get_straight_moves(const BitBoard *bb, enum Square square) {
     int rank = get_rank(square);
     enum File file = get_file(square);
     
-    uint64_t rook_moves = 0x0000000000000000ULL;
+    uint64_t quiet_moves = 0x0000000000000000ULL;
+    uint64_t capture_moves = 0x0000000000000000ULL;
+ 
 
     //Ray Up (Rank + 1 to 7)
     for (int r = rank + 1; r < 8; r++) {
         enum Square target_sq = (enum Square)get_square(file, r);
         if (square_is_occupied(bb->all_pieces, target_sq)) {
-            rook_moves |= (1ULL << target_sq);
+            capture_moves |= (1ULL << target_sq);
             break; 
         }
-        rook_moves |= (1ULL << target_sq);
+        quiet_moves |= (1ULL << target_sq);
     }
 
     //Ray Down (Rank - 1 down to 0)
     for (int r = rank - 1; r >= 0; r--) {
         enum Square target_sq = (enum Square)get_square(file, r);
         if (square_is_occupied(bb->all_pieces, target_sq)) {
-            rook_moves |= (1ULL << target_sq);
+            capture_moves |= (1ULL << target_sq);
             break;         }
-        rook_moves |= (1ULL << target_sq);
+        quiet_moves |= (1ULL << target_sq);
     }
 
     //Ray Right (File + 1 to 7)
     for (int f = file + 1; f < 8; f++) {
         enum Square target_sq = (enum Square)get_square((enum File)f, rank);
         if (square_is_occupied(bb->all_pieces, target_sq)) {
-            rook_moves |= (1ULL << target_sq);
+            capture_moves |= (1ULL << target_sq);
             break;         }
-        rook_moves |= (1ULL << target_sq);
+        quiet_moves |= (1ULL << target_sq);
     }
 
     //Ray Left (File - 1 down to 0)
     for (int f = file - 1; f >= 0; f--) {
         enum Square target_sq = (enum Square)get_square((enum File)f, rank);
         if (square_is_occupied(bb->all_pieces, target_sq)) {
-            rook_moves |= (1ULL << target_sq);
+            capture_moves |= (1ULL << target_sq);
             break;         }
-        rook_moves |= (1ULL << target_sq);
+        quiet_moves |= (1ULL << target_sq);
     }
-
-    return rook_moves;
+    movegen_return return_value =  {capture_moves,quiet_moves};  
+    return return_value;
 }
 
 
-uint64_t get_diagonal_moves(const BitBoard *bb, enum Square square)
-{
-  uint64_t diagonal_moves = 0x0000000000000000ULL;
-  int i;
-  for(i=0;i<4;i++)
-  {
-    int rank = get_rank(square);
-    int file = get_file(square);
+movegen_return get_diagonal_moves(const BitBoard *bb, enum Square square) {
+    uint64_t quiet_moves = 0x0000000000000000ULL;
+    uint64_t capture_moves = 0x0000000000000000ULL;
+    int i;
+    
+    for (i = 0; i < 4; i++) {
+        int rank = get_rank(square);
+        int file = get_file(square);
 
+        int next_rank = rank + diagonal_directions_array[i].rank_direction;
+        int next_file = file + diagonal_directions_array[i].file_direction;
 
-    while(square_is_occupied(bb->all_pieces, get_square(file + diagonal_directions_array[i].file_direction, rank + diagonal_directions_array[i].rank_direction)) == 0)
-    {
-      rank = rank + diagonal_directions_array[i].rank_direction;
-      file = file + diagonal_directions_array[i].file_direction;
-      enum Square target_sq = get_square(file, rank);
+        while (next_rank < 8 && next_rank >= 0 && 
+               next_file < 8 && next_file >= 0 && 
+               square_is_occupied(bb->all_pieces, get_square(next_file, next_rank)) == 0) 
+        {
+            rank = next_rank;
+            file = next_file;
+            enum Square target_sq = (enum Square)get_square(file, rank);
+            quiet_moves |= (1ULL << target_sq);
 
-      diagonal_moves |= (1ULL << target_sq);
-      
+            next_rank = rank + diagonal_directions_array[i].rank_direction;
+            next_file = file + diagonal_directions_array[i].file_direction;
+        }
+        
+        if (next_rank < 8 && next_rank >= 0 && 
+            next_file < 8 && next_file >= 0 && 
+            square_is_occupied(bb->all_pieces, get_square(next_file, next_rank)) == 1) 
+        {
+            rank = next_rank;
+            file = next_file;
+            enum Square target_sq = (enum Square)get_square(file, rank);
+            capture_moves |= (1ULL << target_sq);
+        }
     }
-  }
 
-
-  
-  return diagonal_moves;
-
+    movegen_return return_value = {capture_moves, quiet_moves}; 
+    return return_value;
 }
