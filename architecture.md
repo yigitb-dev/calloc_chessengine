@@ -57,7 +57,7 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 * **Role:** Implements dynamic sliding-piece attack calculators that depend on live piece occupancies.
 * **Key Functions:**
   * `get_straight_moves()`: Generates vertical and horizontal sliding rays, checking for blocking pieces along each file and rank. Returns a `movegen_return` struct.  
-  * `get_diagonal_moves()`: Generates diagonal sliding rays, checking for blocking pieces along each file and rank. Returns a `movegen_return` struct.
+  * `get_diagonal_moves()`: Generates diagonal sliding rays in directions accesed from the `diagonal_directions_array` which contains `4` `diagonal_direction` structs inside of it representing all 4 diagonal directions. It also checks for pieces blocking the path and returns a `movegen_return` struct.
 
 ### 4. The Main Function
 
