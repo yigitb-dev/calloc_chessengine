@@ -50,15 +50,14 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 #### `movegen.h`
 * **Role:** Defines structures for categorizing generated moves to assist with search optimization and move ordering.
 * **Key Structures:**
-  * `rook_movegen` struct: Splits moves into `captures_bb` and `quiet_moves_bb` bitmasks to facilitate alpha-beta pruning and early blunder detection.
+  * `diagonal_direction` struct: Models the diagonal direction by assigning 1 or -1 as values in to its `file_direction` and `rank_direction` in order to represent a diagonal direction.
+  * `movegen_return` struct: Splits moves into `captures_bb` and `quiet_moves_bb` bitmasks to facilitate alpha-beta pruning and early blunder detection.
 
 #### `movegen.c`
 * **Role:** Implements dynamic sliding-piece attack calculators that depend on live piece occupancies.
 * **Key Functions:**
-  * `get_rook_moves()`: Generates vertical and horizontal sliding rays for rooks, checking for blocking pieces along each file and rank.
-  * `get_white_rook_moves()` and `get_black_rook_moves()`: Are wrapper functions for the `get_rook_moves` function. They check wheter the occupied square is occupied by the opposing colour.  
-
----
+  * `get_straight_moves()`: Generates vertical and horizontal sliding rays, checking for blocking pieces along each file and rank. Returns a `movegen_return` struct.  
+  * `get_diagonal_moves()`: Generates diagonal sliding rays, checking for blocking pieces along each file and rank. Returns a `movegen_return` struct.
 
 ### 4. The Main Function
 
