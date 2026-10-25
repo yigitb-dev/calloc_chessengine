@@ -50,7 +50,7 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 #### `movegen.h`
 * **Role:** Defines structures for categorizing generated moves to assist with search optimization and move ordering.
 * **Key Structures:**
-  * `diagonal_direction` struct: Models the diagonal direction by assigning 1 or -1 as values in to its `file_direction` and `rank_direction` in order to represent a diagonal direction.
+  * `diagonal_direction` struct: Models the diagonal direction by assigning `1` or `-1` as values in to its `file_direction` and `rank_direction` in order to represent a diagonal direction.
   * `movegen_return` struct: Splits moves into `captures_bb` and `quiet_moves_bb` bitmasks to facilitate alpha-beta pruning and early blunder detection.
 
 #### `movegen.c`
