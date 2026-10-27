@@ -52,7 +52,6 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 ### 3. Dynamic Move Generation
 
 #### `movegen.h`
-<<<<<<< HEAD
 - **Role:** Defines structures for categorizing generated moves to assist with search optimization and move ordering.
 
 - **Key Structures:**
@@ -63,24 +62,10 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 - **Role:** Implements dynamic sliding-piece ray-casters and pawn attack/push calculators that depend on live piece occupancies.
 
 - **Key Functions:**
-  * `get_straight_moves(const BitBoard *bb, enum Square square)`: Calculates orthogonal sliding rays (Up, Down, Right, Left) from a given square. Iterates step-by-step, appending empty squares to `quiet_moves` and the first blocking piece's square to `capture_moves` before terminating the ray via `break`.
+  * `get_straight_moves(const BitBoard *bb, enum Square square)`: Calculates straight sliding rays (Up, Down, Right, Left) from a given square. Iterates step-by-step, appending empty squares to `quiet_moves` and the first blocking piece's square to `capture_moves` before terminating the ray via `break`.
   * `get_diagonal_moves(const BitBoard *bb, enum Square square)`: Calculates diagonal sliding rays across all four cardinal-diagonal vectors (`{{1,1},{1,-1},{-1,1},{-1,-1}}`). Uses boundary-safe `while` loops to advance through empty spaces (`quiet_moves`) and checks the terminal blocking square for potential captures (`capture_moves`).
   * `generate_white_pawn_moves(const BitBoard *bb, enum Square square)`: Generates pseudo-legal moves for a white pawn. Intersects precomputed diagonal attack maps with `bb->black_pieces` and unions them with `bb->en_passant_mask`. Evaluates single-step quiet pushes against `bb->all_pieces` and handles conditional double-pushes from rank 2.
   * Returns a fully populated `movegen_return` struct containing both capture and quiet move bitmasks.
-
----
-=======
-* **Role:** Defines structures for categorizing generated moves to assist with search optimization and move ordering.
-* **Key Structures:**
-  * `diagonal_direction` struct: Models the diagonal direction by assigning `1` or `-1` as values in to its `file_direction` and `rank_direction` in order to represent a diagonal direction.
-  * `movegen_return` struct: Splits moves into `captures_bb` and `quiet_moves_bb` bitmasks to facilitate alpha-beta pruning and early blunder detection.
-
-#### `movegen.c`
-* **Role:** Implements dynamic sliding-piece attack calculators that depend on live piece occupancies.
-* **Key Functions:**
-  * `get_straight_moves()`: Generates vertical and horizontal sliding rays, checking for blocking pieces along each file and rank. Returns a `movegen_return` struct.  
-  * `get_diagonal_moves()`: Generates diagonal sliding rays in directions accesed from the `diagonal_directions_array` which contains `4` `diagonal_direction` structs inside of it representing all 4 diagonal directions. It also checks for pieces blocking the path and returns a `movegen_return` struct.
->>>>>>> ddd14b31b50e2d65fda27c2e1c037dc97bd8f354
 
 ### 4. The Main Function
 
