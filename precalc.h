@@ -2,7 +2,6 @@
 #define PRECALC_H
 
 #include "board.h"
-#include <stdint.h>
 
 // All directions that a knight can jump to
 typedef struct {

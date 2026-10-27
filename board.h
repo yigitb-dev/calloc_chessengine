@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <cstdint>
 #include <stdint.h>
 
 typedef struct {
@@ -21,6 +22,10 @@ typedef struct {
   uint64_t white_pieces;
   uint64_t black_pieces;
   uint64_t all_pieces;
+
+
+  uint64_t en_passant_mask; //Is generated per half-move contains pawns that moved 2 squares that turn.
+                           //Points to the square behind the pawn in order to make it capturable
 
 } BitBoard;
 
