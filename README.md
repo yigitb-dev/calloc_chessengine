@@ -38,7 +38,11 @@ All of the architecture is documented in [architecture.md](https://github.com/yi
 
    * Dynamic move generation for pawns, rooks, bishops, and queens.
 
-5. **Phase 5 and further: Search & Evaluation** *(Future)*
+5. **Phase 5: Chess Logic Implementation** *(Planned)*
+
+   * Pruning pseudo-legal moves and implementing chess rules.
+   
+6. **Phase 6 and further: Search & Evaluation** *(Future)*
 
    * Material/positional evaluation, Minimax search trees, Alpha-Beta pruning and Universal chess interface(UCI) support.
    * All these things will probably have their own phase as they are complex concepts to implement.
