@@ -127,3 +127,35 @@ movegen_return generate_white_pawn_moves(const BitBoard *bb,enum Square square)
   movegen_return return_value = {capture_moves,quiet_moves};
   return return_value;
 }
+
+movegen_return generate_black_pawn_moves(const BitBoard *bb,enum Square square)
+{
+  uint64_t capture_moves = 0x0000000000000000ULL; 
+  uint64_t quiet_moves = 0x0000000000000000ULL;
+
+  capture_moves = black_pawn_possible_attacks[square] & bb->white_pieces;
+  capture_moves |= bb->en_passant_mask;
+  
+
+  int rank = get_rank(square);
+  int file = get_file(square);
+  enum Square first_square = get_square(file,rank-1);
+  enum Square second_square = get_square(file,rank-2);
+
+  
+  if(square_is_occupied(bb->all_pieces,first_square) ==0)
+  {
+    quiet_moves |= (1ULL << first_square);
+  }
+
+  if(rank ==2)
+  {
+    if(square_is_occupied(bb->all_pieces, second_square) ==0)
+    {
+      quiet_moves |= (1ULL << second_square);
+    }
+  }
+
+  movegen_return return_value = {capture_moves,quiet_moves};
+  return return_value;
+}
