@@ -67,8 +67,22 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
   * `get_diagonal_moves(const BitBoard *bb, enum Square square)`: Calculates diagonal sliding rays across all four cardinal-diagonal vectors (`{{1,1},{1,-1},{-1,1},{-1,-1}}`). Uses boundary-safe `while` loops to advance through empty spaces (`quiet_moves`) and checks the terminal blocking square for potential captures (`capture_moves`).
   * `generate_white_pawn_moves(const BitBoard *bb, enum Square square)`: Generates pseudo-legal moves for a white pawn. Intersects precomputed diagonal attack maps with `bb->black_pieces` and unions them with `bb->en_passant_mask`. Evaluates single-step quiet pushes against `bb->all_pieces` and handles conditional double-pushes from rank 2.
   * Returns a fully populated `movegen_return` struct containing both capture and quiet move bitmasks.
+  
+### 4. Chess Logic Implementation
 
-### 4. The Main Function
+#### `chessrules.h`
+- **Role:** Declares the public interface, move-encoding structures, and rule-validation function prototypes for enforcing legal chess gameplay.
+
+- **Key Logic:**
+  * Exposes `king_is_in_check()` for querying king safety across arbitrary board states.
+  
+#### `chessrules.c`
+- **Role:** Combines move generation with general chess rules like en passant, checks and pins
+
+- **Key Logic:**
+  * `king_is_in_check(const BitBoard *bb, enum Square square, int colour)`: Implements the "super-piece" reverse-attack check from the king's square. Intersects precomputed knight, king, and pawn lookup tables—along with dynamic straight and diagonal rays from `movegen.c`—against enemy piece bitboards (including queens on both orthogonal and diagonal rays) to detect check in $O(1)$ ray steps.
+ 
+### 5. The Main Function
 
 #### `main.c`
 - **Role:** Entry point for execution.
