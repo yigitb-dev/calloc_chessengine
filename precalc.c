@@ -1,7 +1,6 @@
 #include "precalc.h"
 #include "board.h"
 #include <stdint.h>
-#include <sys/types.h>
 
 
 
@@ -85,7 +84,8 @@ void init_white_pawn_attacks()
   //                      RULES OF PAWN MOVES                             
   // If rank +1 and File +1 is occupied by opposite colour capture possible
   // If rank -1 and File +1 is occupied by opposite colour capture possible
-  static const Offset white_pawn_attack_patterns[] = {{1,1},{1,-1}};
+  
+  static const Offset white_pawn_attack_patterns[] = {{-1,1},{1,1}};
   int i;
   for(i=0;i<64;i++)
   {
@@ -119,7 +119,7 @@ void init_black_pawn_attacks()
   //                      RULES OF PAWN MOVES                             
   // If rank +1 and File -1 is occupied by opposite colour capture possible
   // If rank -1 and File -1 is occupied by opposite colour capture possible
-  static const Offset black_pawn_attack_patterns[] = {{-1, 1}, {-1, -1}};
+  static const Offset black_pawn_attack_patterns[] = {{-1, -1}, {1, -1}};
   int i;
   
   for (i = 0; i < 64; i++) {
