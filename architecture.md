@@ -57,6 +57,7 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 - **Key Structures:**
   * `diagonal_direction` struct: Models diagonal directions by assigning step deltas (`file_direction`, `rank_direction`) of `1` or `-1`.
   * `movegen_return` struct: Splits moves into `captures_bb` and `quiet_moves_bb` bitmasks to facilitate alpha-beta pruning and early blunder detection.
+  * `get_queen_moves()` Static inline function: Combines `get_straight_moves()` and `get_diagonal_moves()` to generate queen moves.
 
 #### `movegen.c`
 - **Role:** Implements dynamic sliding-piece ray-casters and pawn attack/push calculators that depend on live piece occupancies.
