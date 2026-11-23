@@ -34,15 +34,15 @@ All of the architecture is documented in [architecture.md](https://github.com/yi
 
    * Precalculation of diagonal captures.
 
-4. **Phase 4: Sliding Pieces & Move Execution** *(Active)*
+4. **Phase 4: Sliding Pieces & Move Execution** 
 
    * Dynamic move generation for pawns, rooks, bishops, and queens.
 
-5. **Phase 5: Chess Logic Implementation** *(Planned)*
+5. **Phase 5: Chess Logic Implementation** *(Active)*
 
    * Pruning pseudo-legal moves and implementing chess rules.
    
-6. **Phase 6 and further: Search & Evaluation** *(Future)*
+6. **Phase 6 and further: Search & Evaluation** *(Planned)*
 
    * Material/positional evaluation, Minimax search trees, Alpha-Beta pruning and Universal chess interface(UCI) support.
    * All these things will probably have their own phase as they are complex concepts to implement.
