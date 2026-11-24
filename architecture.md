@@ -75,12 +75,16 @@ Welcome to the **calloc_chessengine** codebase! This project is a 100% pure C ch
 
 - **Key Logic:**
   * Exposes `king_is_in_check()` for querying king safety across arbitrary board states.
+  * Exposes `void apply_en_passant_state()` to add en_passant moves to the en_passant_mask.
+`
   
 #### `chessrules.c`
 - **Role:** Combines move generation with general chess rules like en passant, checks and pins
 
 - **Key Logic:**
   * `king_is_in_check(const BitBoard *bb, enum Square square, int colour)`: Implements the "super-piece" reverse-attack check from the king's square. Intersects precomputed knight, king, and pawn lookup tables—along with dynamic straight and diagonal rays from `movegen.c`—against enemy piece bitboards (including queens on both orthogonal and diagonal rays) to detect check in $O(1)$ ray steps.
+
+  ** `apply_en_passant_state(BitBoard *bb, enum Square from_square, enum Square to_square, int colour)`: Resets the previous turn's `en_passant_mask` to `0ULL` and records a new En Passant bitmask whenever a white (`rank_diff == 2`) or black (`rank_diff == -2`) pawn advances two squares.
  
 ### 5. The Main Function
 

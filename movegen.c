@@ -116,7 +116,7 @@ movegen_return generate_white_pawn_moves(const BitBoard *bb,enum Square square)
     quiet_moves |= (1ULL << first_square);
   }
 
-  if(rank ==2)
+  if(rank ==1)
   {
     if(square_is_occupied(bb->all_pieces, second_square) ==0)
     {
@@ -148,7 +148,7 @@ movegen_return generate_black_pawn_moves(const BitBoard *bb,enum Square square)
     quiet_moves |= (1ULL << first_square);
   }
 
-  if(rank ==2)
+  if(rank ==6)
   {
     if(square_is_occupied(bb->all_pieces, second_square) ==0)
     {

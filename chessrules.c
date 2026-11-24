@@ -78,3 +78,23 @@ int king_is_in_check(BitBoard *bb,enum Square square,int colour)
     }
     
 }
+
+
+void apply_en_passant_state(BitBoard *bb, enum Square from_square,enum Square to_square, enum Square to_sq,int colour)
+{
+  bb->en_passant_mask = 0ULL;
+
+  //We add white pawns to the en_passant_mask when they move 2 squares
+  if((get_rank(to_square) - get_rank(from_square) == 2 && colour == 0))
+  {
+    bb->en_passant_mask |= (1ULL << to_square);
+  }
+
+  
+  //We add black pawns to the en_passant_mask when they move 2 squares 
+  if((get_rank(to_square) - get_rank(from_square) == -2 && colour == 1))
+  {
+    bb->en_passant_mask |= (1ULL << to_square);
+  }
+  
+}
